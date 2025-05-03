@@ -10,7 +10,7 @@ export default function Home() {
       <Header />
       <main className="flex flex-col items-center justify-center mx-auto p-0 w-full flex-1 overflow-hidden">
         <Logo />
-        <div className="flex flex-col items-center justify-center mt-8 w-full max-w-lg">
+        <div className="flex flex-col items-center justify-center mt-8 w-full max-w-xl">
           <SearchBar />
         </div>
         <ButtonArea />
