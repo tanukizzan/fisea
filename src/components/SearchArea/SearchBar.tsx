@@ -1,12 +1,12 @@
 'use client';
 
-import { useState } from "react";
 import SearchInput from "./SearchComponents/SearchImput";
 import ClearButton from "./SearchComponents/ClearButton";
 import SubmitButton from "./SearchComponents/SubmitButton";
+import { useSearch } from "./SearchContext";
 
 export default function SearchBar() {
-  const [wordInput, setWordInput] = useState('');
+  const {wordInput, setWordInput } = useSearch();
 
   const handleClear = () => {
     setWordInput('');

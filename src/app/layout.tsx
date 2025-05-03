@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchProvider } from "components/SearchArea/SearchContext";
 
 import "./globals.css";
 
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body>
-        {children}
+        <SearchProvider>
+          {children}
+        </SearchProvider>
       </body>
     </html>
   );
