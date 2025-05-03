@@ -1,6 +1,7 @@
 "use client";
 
 import { useSearch } from "../../SearchArea/SearchContext";
+import { useCallback } from "react";
 
 interface LinkProps {
   type: number;
@@ -55,7 +56,7 @@ export const LinkButton: React.FC<LinkProps> = ({
     ? `https://${domain}${queryBefore}${wordInputEncoded}${queryAfter}`
     : `https://${domain}`;
 
-  const searchQuery6 = () => {
+  const searchQuery6 = useCallback(() => {
     if (wordInput.match(/^#/)) {
       return `https://${domain}${queryAlt}${wordInputEncodedHash}`;
     } else if (wordInput.match(/^@/)) {
@@ -65,9 +66,9 @@ export const LinkButton: React.FC<LinkProps> = ({
     } else {
       return `https://${domain}`;
     }
-  };
+  }, [domain, queryAlt, wordInputEncodedHash, wordInputEncodedAt, queryBefore, wordInputEncoded, wordInput]);
 
-  const searchUrl = () => {
+  const searchUrl = useCallback(() => {
     switch (true) {
       case type === 1:
         return searchQuery1;
@@ -85,16 +86,22 @@ export const LinkButton: React.FC<LinkProps> = ({
         console.log("No search query");
         return "";
     }
-  };
+  }, [type, searchQuery1, searchQuery2, searchQuery3, searchQuery4, searchQuery5, searchQuery6]);
+
+  const handleClick = useCallback(() => {
+    const url = searchUrl();
+    if (url) {
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+  }, [searchUrl]);
 
   return (
-    <a
-      href={searchUrl()}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-flex items-center justify-center w-auto min-w-18 h-auto bg-(--button-color) text-(--button-text-color) no-underline py-2.5 px-4 mr-2 rounded-md flex-shrink-0 transition-colors duration-200 hover:text-(--button-text-color-hover)"
+    <button
+      onClick={handleClick}
+      className="inline-flex items-center justify-center w-auto min-w-18 h-auto bg-(--button-color) text-(--button-text-color) no-underline py-2.5 px-4 mr-2 rounded-md flex-shrink-0 transition-colors duration-200 hover:text-(--button-text-color-hover) hover:cursor-pointer"
+      type="button"
     >
       {name}
-    </a>
+    </button>
   );
 };
