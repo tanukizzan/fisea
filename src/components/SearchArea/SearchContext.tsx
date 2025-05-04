@@ -1,19 +1,21 @@
-"use client";
+'use client';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useState, useContext, useRef, RefObject } from 'react';
 
 interface SearchContextType {
   wordInput: string;
   setWordInput: (value: string) => void;
+  searchInputRef: RefObject<HTMLTextAreaElement | null>;
 }
 
 const SearchContext = createContext<SearchContextType | undefined>(undefined);
 
-export function SearchProvider({ children }: { children: ReactNode }) {
+export function SearchProvider({ children }: { children: React.ReactNode }) {
   const [wordInput, setWordInput] = useState('');
+  const searchInputRef = useRef<HTMLTextAreaElement>(null);
 
   return (
-    <SearchContext.Provider value={{ wordInput, setWordInput }}>
+    <SearchContext.Provider value={{ wordInput, setWordInput, searchInputRef }}>
       {children}
     </SearchContext.Provider>
   );

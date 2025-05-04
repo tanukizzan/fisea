@@ -4,21 +4,13 @@ interface ClearButtonProps {
 }
 
 export default function ClearButton({ wordInput, onClear }: ClearButtonProps) {
-  const clearInput = () => {
-    onClear();
-    const searchArea = document.getElementById('window') as HTMLTextAreaElement;
-    if (searchArea) {
-      setTimeout(() => searchArea.focus(), 0);
-    }
-  };
-
   return (
     <>
       {wordInput && wordInput.length > 0 && (
         <button
           type="button"
           className="w-8 h-8 flex items-center justify-center border-none bg-transparent cursor-pointer p-1 mr-2 text-(--search-bar-icon) transition-opacity duration-200"
-          onClick={clearInput}
+          onClick={onClear}
           aria-label="検索をクリア"
         >
           <svg

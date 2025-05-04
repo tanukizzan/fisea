@@ -1,6 +1,7 @@
 "use client";
 
 import { useDefaultSearch } from './useDefaultSearch';
+import { useSearch } from '../SearchContext';
 import './SearchInterface.css';
 
 interface SearchInputProps {
@@ -10,6 +11,7 @@ interface SearchInputProps {
 
 export default function SearchInput({ value, onChange }: SearchInputProps) {
   const { performSearch } = useDefaultSearch();
+  const { searchInputRef } = useSearch();
 
   const handleKeydown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === 'Enter') {
@@ -26,6 +28,7 @@ export default function SearchInput({ value, onChange }: SearchInputProps) {
 
   return (
     <textarea
+      ref={searchInputRef}
       value={value}
       onChange={handleChange}
       onKeyDown={handleKeydown}
