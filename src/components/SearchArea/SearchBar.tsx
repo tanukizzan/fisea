@@ -6,10 +6,14 @@ import SubmitButton from "./SearchComponents/SubmitButton";
 import { useSearch } from "./SearchContext";
 
 export default function SearchBar() {
-  const {wordInput, setWordInput } = useSearch();
+  const { wordInput, setWordInput, searchInputRef } = useSearch();
 
   const handleClear = () => {
     setWordInput('');
+    if (searchInputRef.current) {
+      searchInputRef.current.style.height = 'auto';
+      setTimeout(() => searchInputRef.current?.focus(), 0);
+    }
   };
 
   return (
