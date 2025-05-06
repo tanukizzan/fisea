@@ -3,11 +3,7 @@
 import { useDefaultSearch } from './useDefaultSearch';
 import { useSearch } from '../SearchContext';
 import './SearchInterface.css';
-
-interface SearchInputProps {
-  value: string;
-  onChange: (value: string) => void;
-}
+import { SearchInputProps } from 'types';
 
 export default function SearchInput({ value, onChange }: SearchInputProps) {
   const { performSearch } = useDefaultSearch();

@@ -1,4 +1,4 @@
-import { CategoryItem } from '../types';
+import { CategoryItem } from 'types';
 
 const DB_NAME = 'fiseaDB';
 const DB_VERSION = 1;

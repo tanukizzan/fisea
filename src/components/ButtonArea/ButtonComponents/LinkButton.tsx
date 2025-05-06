@@ -2,19 +2,9 @@
 
 import { useSearch } from "../../SearchArea/SearchContext";
 import { useCallback } from "react";
+import { DomainItem } from 'types';
 
-interface LinkProps {
-  type: number;
-  name: string;
-  domain: string;
-  subDomain?: string;
-  directory?: string;
-  queryBefore?: string;
-  queryAfter?: string;
-  queryAlt?: string;
-}
-
-export const LinkButton: React.FC<LinkProps> = ({
+export const LinkButton: React.FC<DomainItem> = ({
   type,
   name,
   domain,

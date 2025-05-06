@@ -1,12 +1,7 @@
 'use client';
 
-import React, { createContext, useState, useContext, useRef, RefObject } from 'react';
-
-interface SearchContextType {
-  wordInput: string;
-  setWordInput: (value: string) => void;
-  searchInputRef: RefObject<HTMLTextAreaElement | null>;
-}
+import React, { createContext, useState, useContext, useRef } from 'react';
+import { SearchContextType } from 'types';
 
 const SearchContext = createContext<SearchContextType | undefined>(undefined);
 

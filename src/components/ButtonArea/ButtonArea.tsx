@@ -5,7 +5,7 @@ import { LinkButton } from './ButtonComponents/LinkButton';
 import domainList from './ButtonComponents/domainList.json';
 import buttonListData from './ButtonComponents/buttonList.json';
 import { syncButtonData } from '../../utils/indexedDB';
-import { DomainItem, CategoryItem } from '../../types';
+import { DomainItem, CategoryItem } from 'types';
 
 // カテゴリアイコンのマッピング
 const categoryIconMap: Record<string, string> = {
@@ -17,7 +17,7 @@ const categoryIconMap: Record<string, string> = {
   "Other": "icon-[mdi--folder]"
 };
 
-const ButtonArea: React.FC = () => {
+export default function ButtonArea() {
   const [categories, setCategories] = useState<CategoryItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -96,5 +96,3 @@ const ButtonArea: React.FC = () => {
     </div>
   );
 };
-
-export default ButtonArea;
