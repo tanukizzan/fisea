@@ -1,13 +1,11 @@
 import Logo from "components/Logo";
-import Header from "components/Header";
-import Footer from "components/Footer";
+import SettingsButton from "components/Settings/SettingsButton";
 import SearchBar from "components/SearchArea/SearchBar";
 import ButtonArea from "components/ButtonArea/ButtonArea";
 
 export default function Home() {
   return (
     <div className="flex flex-col w-full h-[100dvh]">
-      <Header />
       <main className="flex flex-col items-center justify-center mx-auto p-0 w-full flex-1 overflow-hidden">
         <Logo />
         <div className="flex flex-col items-center justify-center mt-8 w-full max-w-2xl">
@@ -15,7 +13,9 @@ export default function Home() {
         </div>
         <ButtonArea />
       </main>
-      <Footer />
+      <footer className="absolute bottom-0 flex items-center justify-center w-full h-16">
+        <SettingsButton />
+      </footer>
     </div>
   );
 }
