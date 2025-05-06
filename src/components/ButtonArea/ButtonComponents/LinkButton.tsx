@@ -66,7 +66,20 @@ export const LinkButton: React.FC<LinkProps> = ({
     } else {
       return `https://${domain}`;
     }
-  }, [domain, queryAlt, wordInputEncodedHash, wordInputEncodedAt, queryBefore, wordInputEncoded, wordInput]);
+  }, [domain, queryAlt, queryBefore, wordInputEncodedHash, wordInputEncodedAt, wordInputEncoded, wordInput]);
+
+  // pixiv用の検索クエリ設定
+  const searchQuery7 = useCallback(() => {
+    if (wordInput.match(/^#/)) {
+      return `https://${domain}${queryBefore}${wordInputEncodedHash}`;
+    } else if (wordInput.match(/^@/)) {
+      return `https://${domain}${queryAlt}${wordInputEncodedAt}`;
+    } else if (wordInput) {
+      return `https://${domain}${queryBefore}${wordInputEncoded}${queryAfter}`;
+    } else {
+      return `https://${domain}`;
+    }
+  }, [domain, queryAlt, queryBefore, queryAfter, wordInputEncodedHash, wordInputEncodedAt, wordInputEncoded, wordInput]);
 
   const searchUrl = useCallback(() => {
     switch (true) {
@@ -82,11 +95,13 @@ export const LinkButton: React.FC<LinkProps> = ({
         return searchQuery5;
       case type === 6:
         return searchQuery6();
+        case type === 7:
+        return searchQuery7();
       default:
         console.log("No search query");
         return "";
     }
-  }, [type, searchQuery1, searchQuery2, searchQuery3, searchQuery4, searchQuery5, searchQuery6]);
+  }, [type, searchQuery1, searchQuery2, searchQuery3, searchQuery4, searchQuery5, searchQuery6, searchQuery7]);
 
   const handleClick = useCallback(() => {
     const url = searchUrl();
@@ -98,7 +113,7 @@ export const LinkButton: React.FC<LinkProps> = ({
   return (
     <button
       onClick={handleClick}
-      className="inline-flex items-center justify-center w-auto min-w-18 h-auto bg-(--button-color) text-(--button-text-color) no-underline py-2.5 px-4 mr-2 rounded-md flex-shrink-0 transition-colors duration-200 hover:text-(--button-text-color-hover) hover:cursor-pointer"
+      className="inline-flex items-center justify-center w-auto min-w-18 h-auto bg-(--button-color) text-(--button-text-color) no-underline py-2.5 px-4 mr-2 rounded-md flex-shrink-0 transition-colors duration-200 cursor-pointer hover:text-(--button-text-color-hover)"
       type="button"
     >
       {name}

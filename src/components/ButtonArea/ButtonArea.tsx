@@ -1,30 +1,11 @@
-import React, { useMemo } from 'react';
+"use client"
+
+import React, { useMemo, useState, useEffect } from 'react';
 import { LinkButton } from './ButtonComponents/LinkButton';
 import domainList from './ButtonComponents/domainList.json';
 import buttonListData from './ButtonComponents/buttonList.json';
-
-// TypeScript インターフェース定義
-interface DomainItem {
-  name: string;
-  type: number;
-  domain: string;
-  subDomain?: string;
-  directory?: string;
-  queryBefore?: string;
-  queryAfter?: string;
-  queryAlt?: string;
-}
-
-interface ButtonItem {
-  name: string;
-  isActive: boolean;
-}
-
-interface CategoryItem {
-  name: string;
-  isActive: boolean;
-  list: ButtonItem[];
-}
+import { syncButtonData } from '../../utils/indexedDB';
+import { DomainItem, CategoryItem } from '../../types';
 
 // カテゴリアイコンのマッピング
 const categoryIconMap: Record<string, string> = {
@@ -37,6 +18,28 @@ const categoryIconMap: Record<string, string> = {
 };
 
 const ButtonArea: React.FC = () => {
+  const [categories, setCategories] = useState<CategoryItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  // データの初期化とIndexedDBとの同期
+  useEffect(() => {
+    const initializeData = async () => {
+      try {
+        // サーバーデータとIndexedDBを比較・同期して最新データを取得
+        const syncedData = await syncButtonData(buttonListData as CategoryItem[]);
+        setCategories(syncedData);
+      } catch (error) {
+        console.error('データ初期化エラー:', error);
+        // エラー時はサーバーデータを使用
+        setCategories(buttonListData as CategoryItem[]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    initializeData();
+  }, []);
+
   // domainList をマップとして準備
   const domainMap = useMemo(() => {
     const map = new Map<string, DomainItem>();
@@ -46,10 +49,14 @@ const ButtonArea: React.FC = () => {
     return map;
   }, []);
 
-  // アクティブなカテゴリを直接JSONから取得
+  // アクティブなカテゴリをステート経由で取得
   const activeCategories = useMemo(() => {
-    return (buttonListData as CategoryItem[]).filter(category => category.isActive);
-  }, []);
+    return categories.filter(category => category.isActive);
+  }, [categories]);
+
+  if (loading) {
+    return <div className="flex justify-center items-center my-8">読み込み中...</div>;
+  }
 
   return (
     <div className="flex flex-col justify-center mx-auto my-4 mb-8 max-md:overflow-x-scroll max-md:w-full">
