@@ -1,7 +1,4 @@
-interface ClearButtonProps {
-  wordInput: string;
-  onClear: () => void;
-}
+import { ClearButtonProps } from 'types';
 
 export default function ClearButton({ wordInput, onClear }: ClearButtonProps) {
   return (

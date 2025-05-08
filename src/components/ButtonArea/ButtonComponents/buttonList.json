@@ -44,6 +44,18 @@
       {
         "name": "Wikipedia",
         "isActive": true
+      },
+      {
+        "name": "JustWatch",
+        "isActive": false
+      },
+      {
+        "name": "J-Stage",
+        "isActive": false
+      },
+      {
+        "name": "カーリル",
+        "isActive": false
       }
     ]
   },
@@ -69,7 +81,7 @@
       },
       {
         "name": "Felo",
-        "isActive": true
+        "isActive": false
       }
     ]
   },
@@ -90,8 +102,24 @@
         "isActive": true
       },
       {
-        "name": "AliExpress",
+        "name": "メルカリ",
         "isActive": true
+      },
+      {
+        "name": "ラクマ",
+        "isActive": false
+      },
+      {
+        "name": "Y!フリマ",
+        "isActive": false
+      },
+      {
+        "name": "ヤフオク",
+        "isActive": false
+      },
+      {
+        "name": "AliExpress",
+        "isActive": false
       }
     ]
   },
@@ -112,8 +140,20 @@
         "isActive": true
       },
       {
+        "name": "Facebook",
+        "isActive": false
+      },
+      {
         "name": "note",
         "isActive": true
+      },
+      {
+        "name": "Pinterest",
+        "isActive": false
+      },
+      {
+        "name": "pixiv",
+        "isActive": false
       }
     ]
   }

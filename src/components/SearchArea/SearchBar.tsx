@@ -1,6 +1,6 @@
 'use client';
 
-import SearchInput from "./SearchComponents/SearchImput";
+import SearchInput from "./SearchComponents/SearchInput";
 import ClearButton from "./SearchComponents/ClearButton";
 import SubmitButton from "./SearchComponents/SubmitButton";
 import { useSearch } from "./SearchContext";

@@ -16,6 +16,7 @@
   --button-color: light-dark(#e9eef1, #12334a);
   --button-text-color: light-dark(#0a1c29, #c3dcef);
   --button-text-color-hover: light-dark(#1c4f73, #f7fbfd);
+  --save-button-text-color: light-dark(#ffffff, #0a1c29);
 }
 
 html,
