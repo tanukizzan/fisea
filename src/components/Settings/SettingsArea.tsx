@@ -1,9 +1,7 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
-import { CategoryItem } from 'types';
-import buttonListData from '../ButtonArea/ButtonComponents/buttonList.json';
-import { getButtonData, saveButtonData } from '../../utils/indexedDB';
+import React from 'react';
+import { useSettings } from 'contexts/SettingsContext';
 
 // カテゴリアイコンのマッピング
 const categoryIconMap: Record<string, string> = {
@@ -16,77 +14,7 @@ const categoryIconMap: Record<string, string> = {
 };
 
 export default function SettingsArea() {
-  const [categories, setCategories] = useState<CategoryItem[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  // データの初期化
-  useEffect(() => {
-    const initializeData = async () => {
-      try {
-        const dbData = await getButtonData();
-        // buttonList.jsonの順序を維持するために、dbDataをbuttonListDataの順序に合わせて並び替え
-        const orderedData = buttonListData.map(buttonCategory => {
-          const dbCategory = dbData.find(cat => cat.name === buttonCategory.name);
-          return dbCategory || buttonCategory;
-        });
-        setCategories(orderedData);
-      } catch (error) {
-        console.error('データ初期化エラー:', error);
-        setCategories(buttonListData as CategoryItem[]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    initializeData();
-  }, []);
-
-  // カテゴリの有効/無効を切り替え
-  const toggleCategory = (categoryIndex: number) => {
-    setCategories(prevCategories => {
-      const newCategories = [...prevCategories];
-      newCategories[categoryIndex] = {
-        ...newCategories[categoryIndex],
-        isActive: !newCategories[categoryIndex].isActive
-      };
-      return newCategories;
-    });
-  };
-
-  // ボタンの有効/無効を切り替え
-  const toggleButton = (categoryIndex: number, buttonIndex: number) => {
-    setCategories(prevCategories => {
-      const newCategories = prevCategories.map((category, idx) => {
-        if (idx === categoryIndex) {
-          return {
-            ...category,
-            list: category.list.map((button, btnIdx) => {
-              if (btnIdx === buttonIndex) {
-                return {
-                  ...button,
-                  isActive: !button.isActive
-                };
-              }
-              return button;
-            })
-          };
-        }
-        return category;
-      });
-      return newCategories;
-    });
-  };
-
-  // 設定を保存
-  const handleSave = async () => {
-    try {
-      await saveButtonData(categories);
-      alert('設定を保存しました');
-    } catch (error) {
-      console.error('設定保存エラー:', error);
-      alert('設定の保存に失敗しました');
-    }
-  };
+  const { categories, loading, toggleCategory, toggleButton } = useSettings();
 
   if (loading) {
     return <div className="flex justify-center items-center my-8">読み込み中...</div>;
@@ -119,16 +47,6 @@ export default function SettingsArea() {
           </div>
         </div>
       ))}
-      <div className="flex justify-end mt-4">
-        {/* 保存ボタン（仮置き） TODO: 保存ボタンを外に出す */}
-        <button
-          onClick={handleSave}
-          className="flex items-center px-4 py-2 bg-(--button-color) text-(--button-text-color) rounded-md hover:opacity-80 transition-opacity duration-200"
-        >
-          <span className="icon-[mdi--check] mr-1"></span>
-          保存
-        </button>
-      </div>
     </div>
   );
 }
