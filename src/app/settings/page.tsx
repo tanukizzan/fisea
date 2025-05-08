@@ -1,7 +1,7 @@
 import Logo from "components/Logo";
 import SaveButton from "components/Settings/SaveButton";
 import SearchBar from "components/SearchArea/SearchBar";
-import ButtonArea from "components/ButtonArea/ButtonArea";
+import SettingsArea from "components/Settings/SettingsArea";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
         <div className="flex flex-col items-center justify-center mt-8 w-full max-w-2xl">
           <SearchBar />
         </div>
-        <ButtonArea />
+        <SettingsArea />
       </main>
       <footer className="absolute bottom-0 flex items-center justify-center w-full h-16">
         <SaveButton />
