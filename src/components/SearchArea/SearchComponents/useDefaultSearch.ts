@@ -4,8 +4,8 @@ export const useDefaultSearch = () => {
       searchWord.replace(/^[\p{C}\p{Z}]+|[\p{C}\p{Z}]+$/gu, "")
     );
     const url = searchWord
-      ? `https://www.google.com/search?q=${encodedQuery}`
-      : "https://www.google.com/";
+      ? `https://www.google.co.jp/search?q=${encodedQuery}`
+      : "https://www.google.co,jp/";
 
     window.open(url, '_blank');
   };
