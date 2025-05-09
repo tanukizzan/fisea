@@ -118,6 +118,14 @@
         "isActive": false
       },
       {
+        "name": "ヨドバシ",
+        "isActive": false
+      },
+      {
+        "name": "ビック",
+        "isActive": false
+      },
+      {
         "name": "AliExpress",
         "isActive": false
       }
