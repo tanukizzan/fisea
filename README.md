@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# fisea | ファイシ―
 
-## Getting Started
+> Find yourself,  
+> Search the world,  
+> fisea.
 
-First, run the development server:
+fisea（ファイシー）は普段よくつかうサイトを選んで検索できるポータルサイトです。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 使い方
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. 検索バーに検索したいキーワードを入力する
+2. 検索したいWebサイトのボタンをクリック
+3. 新しいタブで検索結果が表示されます！
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### その他の機能
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- エンターキーを押すとGoogle検索の結果が表示されます
+- 検索バーに何も入力していない状態でサイトごとのボタンをクリックすると、トップページが表示されます
+- 画面下部の設定から、各検索ボタンの表示・非表示を切り替えることができます
+  - カテゴリ（行）全体を非表示にしたい場合、カテゴリのアイコンをクリックすることで非表示にできます
+  - 完了後に保存ボタンを押すと、ブラウザ内に設定が保存されます
+  - ブラウザの閲覧履歴・サイトデータを削除するまで保持されます
 
-## Learn More
+## 今後のアップデート予定
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 検索できるサイトの追加
+- ボタン位置の並べ替え機能
+- 新しいタブで開くか、同じタブのまま開くかのオプション
+- エンターキーを押した後に遷移するデフォルトサイトを変更できるオプション
+- 検索履歴の保存・表示
+- 検索ボタンのレイアウトを複数保存して切り替えるレイヤー機能
+- などなど……
