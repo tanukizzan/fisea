@@ -10,7 +10,7 @@ interface SettingsContextType {
   categories: CategoryItem[];
   loading: boolean;
   toggleCategory: (categoryIndex: number) => void;
-  toggleButton: (categoryIndex: number, buttonIndex: number) => void;
+  toggleButton: (buttonId: string) => void;
   handleSave: () => Promise<void>;
 }
 
@@ -27,12 +27,34 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         const dbData = await getButtonData();
         const orderedData = buttonListData.map(buttonCategory => {
           const dbCategory = dbData.find(cat => cat.name === buttonCategory.name);
-          return dbCategory || buttonCategory;
+          if (dbCategory) {
+            return {
+              ...dbCategory,
+              list: dbCategory.list.map(button => ({
+                ...button,
+                id: `${buttonCategory.name}-${button.name}`
+              }))
+            };
+          }
+          return {
+            ...buttonCategory,
+            list: buttonCategory.list.map(button => ({
+              ...button,
+              id: `${buttonCategory.name}-${button.name}`
+            }))
+          };
         });
         setCategories(orderedData);
       } catch (error) {
         console.error('データ初期化エラー:', error);
-        setCategories(buttonListData as CategoryItem[]);
+        const dataWithIds = buttonListData.map(category => ({
+          ...category,
+          list: category.list.map(button => ({
+            ...button,
+            id: `${category.name}-${button.name}`
+          }))
+        }));
+        setCategories(dataWithIds as CategoryItem[]);
       } finally {
         setLoading(false);
       }
@@ -52,38 +74,47 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const toggleButton = (categoryIndex: number, buttonIndex: number) => {
+  const toggleButton = (buttonId: string) => {
     setCategories(prevCategories => {
-      const newCategories = prevCategories.map((category, idx) => {
-        if (idx === categoryIndex) {
-          return {
-            ...category,
-            list: category.list.map((button, btnIdx) => {
-              if (btnIdx === buttonIndex) {
-                return {
-                  ...button,
-                  isActive: !button.isActive
-                };
-              }
-              return button;
-            })
-          };
+      return prevCategories.map(category => {
+        const buttonIndex = category.list.findIndex(button => button.id === buttonId);
+        if (buttonIndex === -1) return category;
+
+        const button = category.list[buttonIndex];
+        const newIsActive = !button.isActive;
+
+        // ボタンの状態を更新
+        const updatedButton = {
+          ...button,
+          isActive: newIsActive
+        };
+
+        // リストを更新
+        const newList = [...category.list];
+        newList[buttonIndex] = updatedButton;
+
+        // 有効化された場合は最後に移動
+        if (newIsActive) {
+          newList.splice(buttonIndex, 1);
+          newList.push(updatedButton);
         }
-        return category;
+
+        return {
+          ...category,
+          list: newList
+        };
       });
-      return newCategories;
     });
   };
 
   const handleSave = async () => {
     try {
       await saveButtonData(categories);
-      // alert('設定を保存しました');
-      router.push('/');
+      router.replace('/');
     } catch (error) {
       console.error('設定保存エラー:', error);
       alert('設定の保存に失敗しました');
-      router.push('/');
+      router.replace('/');
     }
   };
 
