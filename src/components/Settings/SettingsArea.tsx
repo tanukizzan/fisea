@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useSettings } from "contexts/SettingsContext";
+import { useRouter } from "next/navigation";
 
 // カテゴリアイコンのマッピング
 const categoryIconMap: Record<string, string> = {
@@ -16,6 +17,8 @@ const categoryIconMap: Record<string, string> = {
 export default function SettingsArea() {
   const { categories, loading, toggleCategory, toggleButton } = useSettings();
   const [expandedCategories, setExpandedCategories] = useState<Set<number>>(new Set());
+  const [isDeleting, setIsDeleting] = useState(false);
+  const router = useRouter();
 
   if (loading) {
     return (
@@ -33,6 +36,28 @@ export default function SettingsArea() {
       }
       return newSet;
     });
+  };
+
+  const handleDeleteIndexedDB = async () => {
+    if (!window.confirm('IndexedDBのデータを削除しますか？この操作は取り消せません。')) {
+      return;
+    }
+
+    setIsDeleting(true);
+    try {
+      const databases = await window.indexedDB.databases();
+      for (const db of databases) {
+        if (db.name) {
+          await window.indexedDB.deleteDatabase(db.name);
+        }
+      }
+      router.replace('/');
+    } catch (error) {
+      console.error('IndexedDBの削除中にエラーが発生しました:', error);
+      alert('データの削除中にエラーが発生しました。');
+    } finally {
+      setIsDeleting(false);
+    }
   };
 
   return (
@@ -64,7 +89,7 @@ export default function SettingsArea() {
                   .map((button) => (
                     <div key={button.id} className="relative group">
                       <button
-                        className="min-w-18 px-3 py-2 rounded-md whitespace-nowrap cursor-pointer bg-(--button-color) text-(--button-text-color) border-2 border-solid border-(--search-bar-border-hover)"
+                        className="min-w-18 px-3 py-2 rounded-md whitespace-nowrap bg-(--button-color) text-(--button-text-color) border-2 border-solid border-(--search-bar-border-hover)"
                         disabled={!category.isActive}
                       >
                         {button.name}
@@ -86,18 +111,21 @@ export default function SettingsArea() {
                   title={isExpanded ? "無効のボタンを隠す" : "無効のボタンを表示"}
                 >
                   {isExpanded ? 
-                    <span className={`icon-[mdi--minus] w-5 h-5`}></span>
+                    <span className={`icon-[mdi--check] w-5 h-5`}></span>
                   : <span className={`icon-[mdi--plus] w-5 h-5`}></span>}
                 </button>
               )}
             </div>
             {isExpanded && hasInactiveButtons && category.isActive && (
-              <div className="flex justify-center flex-wrap rounded-md p-2 max-w-lg gap-2 mt-2 bg-(--search-bar-bg)">
+              <div className="flex flex-wrap max-md:flex-nowrap rounded-md max-w-xl w-full gap-2 mt-2 max-md:ml-5">
+                <div className="flex justify-center items-center w-[2.7em] h-[2.7em] text-base font-bold text-(--button-text-color) rounded-full flex-shrink-0">
+                  <span className="icon-[mdi--favorite-add-outline] w-6 h-6"></span>
+                </div>
                 {inactiveButtons.map((button) => (
                   <button
                     key={button.id}
                     onClick={() => toggleButton(button.id)}
-                    className="px-3 py-2 rounded-md cursor-pointer bg-(--button-color) text-(--button-text-color) border-2 border-dashed border-(--search-bar-border-hover) hover:border-solid"
+                    className="px-3 py-2 rounded-md whitespace-nowrap cursor-pointer bg-(--button-color) text-(--button-text-color) border-2 border-dashed border-(--search-bar-border-hover) hover:border-solid"
                     title={`${button.name}を有効にする`}
                   >
                     {button.name}
@@ -108,6 +136,17 @@ export default function SettingsArea() {
           </div>
         );
       })}
+      <div className="flex justify-center mt-8">
+        <button
+          onClick={handleDeleteIndexedDB}
+          disabled={isDeleting}
+          className="px-4 py-2 rounded-md cursor-pointer bg-red-500 text-white border-2 border-solid border-red-600 hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          title="IndexedDBのデータを削除します"
+        >
+          <span className="icon-[mdi--database-remove] w-5 h-5"></span>
+          {isDeleting ? '削除中...' : 'リセットする'}
+        </button>
+      </div>
     </div>
   );
 }
