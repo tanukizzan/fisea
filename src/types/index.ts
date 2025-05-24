@@ -30,6 +30,7 @@ export interface DomainItem {
 export interface ButtonItem {
   name: string;
   isActive: boolean;
+  id: string;
 }
 
 export interface CategoryItem {
