@@ -79,11 +79,11 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     try {
       await saveButtonData(categories);
       // alert('設定を保存しました');
-      router.push('/');
+      router.replace('/');
     } catch (error) {
       console.error('設定保存エラー:', error);
       alert('設定の保存に失敗しました');
-      router.push('/');
+      router.replace('/');
     }
   };
 
