@@ -5,7 +5,7 @@ export const useDefaultSearch = () => {
     );
     const url = searchWord
       ? `https://www.google.co.jp/search?q=${encodedQuery}`
-      : "https://www.google.co,jp/";
+      : "https://www.google.co.jp/";
 
     window.open(url, '_blank');
   };
