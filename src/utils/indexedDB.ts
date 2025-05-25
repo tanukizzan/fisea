@@ -1,10 +1,14 @@
 import { CategoryItem, DomainItem } from 'types';
 
 const DB_NAME = 'fiseaDB';
-const DB_VERSION = 1;
+const DB_VERSION = 2; // バージョンを上げて、ストアの変更をトリガー
 const BUTTON_STORE = 'buttonData';
-const DEFAULT_SEARCH_STORE = 'defaultSearch';
-const SETTINGS_STORE = 'settings';
+const SETTINGS_STORE = 'settingsData';
+
+type SettingsData = {
+  defaultSearch?: DomainItem;
+  tabOpenType?: 'new' | 'current';
+};
 
 // IndexedDBへの接続を開く
 export const openDB = (): Promise<IDBDatabase> => {
@@ -21,16 +25,12 @@ export const openDB = (): Promise<IDBDatabase> => {
       if (db.objectStoreNames.contains(BUTTON_STORE)) {
         db.deleteObjectStore(BUTTON_STORE);
       }
-      if (db.objectStoreNames.contains(DEFAULT_SEARCH_STORE)) {
-        db.deleteObjectStore(DEFAULT_SEARCH_STORE);
-      }
       if (db.objectStoreNames.contains(SETTINGS_STORE)) {
         db.deleteObjectStore(SETTINGS_STORE);
       }
       
       // ストアを新規作成
       db.createObjectStore(BUTTON_STORE, { keyPath: 'name' });
-      db.createObjectStore(DEFAULT_SEARCH_STORE);
       db.createObjectStore(SETTINGS_STORE);
     };
   });
@@ -65,29 +65,46 @@ export const saveButtonData = async (data: CategoryItem[]): Promise<void> => {
   });
 };
 
-// デフォルト検索サイトの設定を取得
-export const getDefaultSearch = async (): Promise<DomainItem | null> => {
+// 設定データを取得
+export const getSettingsData = async (): Promise<SettingsData> => {
   const db = await openDB();
   return new Promise((resolve, reject) => {
-    const transaction = db.transaction(DEFAULT_SEARCH_STORE, 'readonly');
-    const store = transaction.objectStore(DEFAULT_SEARCH_STORE);
-    const request = store.get('default-search-settings');
+    const transaction = db.transaction(SETTINGS_STORE, 'readonly');
+    const store = transaction.objectStore(SETTINGS_STORE);
+    const request = store.get('settings');
     
     request.onerror = () => reject(request.error);
-    request.onsuccess = () => resolve(request.result || null);
+    request.onsuccess = () => resolve(request.result || {});
   });
 };
 
-// デフォルト検索サイトの設定を保存
-export const saveDefaultSearch = async (data: DomainItem): Promise<void> => {
+// 設定データを保存
+export const saveSettingsData = async (data: Partial<SettingsData>): Promise<void> => {
   const db = await openDB();
-  const transaction = db.transaction(DEFAULT_SEARCH_STORE, 'readwrite');
-  const store = transaction.objectStore(DEFAULT_SEARCH_STORE);
-  
-  store.put(data, 'default-search-settings');
-  
   return new Promise((resolve, reject) => {
-    transaction.oncomplete = () => resolve();
+    const transaction = db.transaction(SETTINGS_STORE, 'readwrite');
+    const store = transaction.objectStore(SETTINGS_STORE);
+    
+    // 既存の設定を取得
+    const getRequest = store.get('settings');
+    
+    getRequest.onsuccess = () => {
+      // 新しい設定と既存の設定をマージ
+      const existingSettings = getRequest.result || {};
+      const updatedSettings = {
+        ...existingSettings,
+        ...data
+      };
+      
+      // 更新された設定を保存
+      const putRequest = store.put(updatedSettings, 'settings');
+      
+      putRequest.onsuccess = () => resolve();
+      putRequest.onerror = () => reject(putRequest.error);
+    };
+    
+    getRequest.onerror = () => reject(getRequest.error);
+    
     transaction.onerror = () => reject(transaction.error);
   });
 };

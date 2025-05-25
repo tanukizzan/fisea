@@ -1,47 +1,32 @@
 import { useState, useEffect } from 'react';
+import { getSettingsData, saveSettingsData } from 'utils/indexedDB';
 import { DomainItem } from 'types';
-import { openDB } from 'utils/indexedDB';
-
-const STORE_NAME = 'defaultSearch';
-const KEY = 'default-search-settings';
 
 export const useDefaultSearchSettings = () => {
   const [defaultSearch, setDefaultSearch] = useState<DomainItem | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const initDB = async () => {
+    const loadSettings = async () => {
       try {
-        const db = await openDB();
-        const transaction = db.transaction(STORE_NAME, 'readonly');
-        const store = transaction.objectStore(STORE_NAME);
-        const getRequest = store.get(KEY);
-
-        getRequest.onsuccess = () => {
-          setDefaultSearch(getRequest.result || null);
-          setIsLoading(false);
-        };
-
-        getRequest.onerror = () => {
-          console.error('設定の読み込みに失敗しました');
-          setIsLoading(false);
-        };
+        const settings = await getSettingsData();
+        if (settings.defaultSearch) {
+          setDefaultSearch(settings.defaultSearch);
+        }
       } catch (error) {
-        console.error('IndexedDBの初期化に失敗しました:', error);
+        console.error('設定の読み込みに失敗しました:', error);
+      } finally {
         setIsLoading(false);
       }
     };
 
-    initDB();
+    loadSettings();
   }, []);
 
-  const saveDefaultSearch = async (search: DomainItem) => {
+  const saveDefaultSearch = async (data: DomainItem) => {
     try {
-      const db = await openDB();
-      const transaction = db.transaction(STORE_NAME, 'readwrite');
-      const store = transaction.objectStore(STORE_NAME);
-      store.put(search, KEY);
-      setDefaultSearch(search);
+      await saveSettingsData({ defaultSearch: data });
+      setDefaultSearch(data);
     } catch (error) {
       console.error('設定の保存に失敗しました:', error);
     }

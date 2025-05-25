@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-import { openDB } from 'utils/indexedDB';
-
-const TAB_OPEN_KEY = 'tabOpenType';
+import { getSettingsData, saveSettingsData } from 'utils/indexedDB';
 
 type TabOpenType = 'new' | 'current';
 
@@ -12,25 +10,13 @@ export const useTabOpenSettings = () => {
   useEffect(() => {
     const loadSettings = async () => {
       try {
-        const db = await openDB();
-        const transaction = db.transaction('settings', 'readonly');
-        const store = transaction.objectStore('settings');
-        const request = store.get(TAB_OPEN_KEY);
-
-        request.onerror = () => {
-          console.error('設定の読み込みに失敗しました:', request.error);
-          setIsLoading(false);
-        };
-
-        request.onsuccess = () => {
-          const savedType = request.result;
-          if (savedType) {
-            setTabOpenType(savedType);
-          }
-          setIsLoading(false);
-        };
+        const settings = await getSettingsData();
+        if (settings.tabOpenType) {
+          setTabOpenType(settings.tabOpenType);
+        }
       } catch (error) {
         console.error('設定の読み込みに失敗しました:', error);
+      } finally {
         setIsLoading(false);
       }
     };
@@ -40,19 +26,8 @@ export const useTabOpenSettings = () => {
 
   const saveTabOpenType = async (type: TabOpenType) => {
     try {
-      const db = await openDB();
-      const transaction = db.transaction('settings', 'readwrite');
-      const store = transaction.objectStore('settings');
-      
-      store.put(type, TAB_OPEN_KEY);
-      
-      return new Promise<void>((resolve, reject) => {
-        transaction.oncomplete = () => {
-          setTabOpenType(type);
-          resolve();
-        };
-        transaction.onerror = () => reject(transaction.error);
-      });
+      await saveSettingsData({ tabOpenType: type });
+      setTabOpenType(type);
     } catch (error) {
       console.error('設定の保存に失敗しました:', error);
     }
