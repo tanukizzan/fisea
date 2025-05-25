@@ -34,3 +34,15 @@ body {
   color: var(--text-color);
   font-size: 16px;
 }
+
+/* ベーススタイル適用 */
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+::picker(select) {
+  border: 2px solid var(--search-bar-border);
+  background-color: var(--search-bar-bg);
+  padding: 0.5em;
+}

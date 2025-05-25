@@ -1,5 +1,9 @@
 import { RefObject } from 'react';
 
+export interface ProcessEnv {
+  NEXT_PUBLIC_SITE_URL: string;
+}
+
 export interface SearchInputProps {
   value: string;
   onChange: (value: string) => void;

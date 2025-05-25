@@ -1,0 +1,11 @@
+{
+  "name": "fisea | ファイシ―",
+  "short_name": "fisea",
+  "description": "ファイシ―はよく使うサイトをまとめて検索できるポータルサイトです。",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [
+    { "src": "/icon-192x192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon-512x512.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}
