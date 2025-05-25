@@ -57,7 +57,7 @@ function SortableButton({ button, category, onToggle }: {
     <div ref={setNodeRef} style={style} className="relative group touch-none">
       <div {...attributes} {...listeners}>
         <button
-          className="select-none cursor-move min-w-18 px-3 py-2 rounded-md whitespace-nowrap bg-(--button-color) text-(--button-text-color) border-2 border-solid border-(--search-bar-border-hover)"
+          className="select-none cursor-move min-w-18 py-2 px-3.5 rounded-md whitespace-nowrap bg-(--button-color) text-(--button-text-color) border-3 border-solid border-(--button-border)"
           disabled={!category.isActive}
           type="button"
         >
@@ -66,7 +66,7 @@ function SortableButton({ button, category, onToggle }: {
       </div>
       <button
         onClick={handleCloseClick}
-        className="absolute cursor-pointer -top-2 -right-2 w-5 h-5 flex items-center justify-center bg-(--search-bar-bg) border-solid border-2 border-(--search-bar-border-hover) text-(--button-text-color) rounded-full group-hover:opacity-100 transition-opacity duration-200"
+        className="absolute cursor-pointer -top-2 -right-2 w-5 h-5 flex items-center justify-center bg-(--search-bar-bg) border-solid border-3 border-(--button-border) text-(--button-text-color) rounded-full group-hover:opacity-100 transition-opacity duration-200"
         title={`${button.name}を非表示にする`}
         type="button"
       >
@@ -144,7 +144,7 @@ export default function ButtonSettingsArea() {
             }`}>
               <button
                 onClick={() => toggleCategory(categoryIndex)}
-                className="flex items-center justify-center w-[2.7em] h-[2.7em] mr-2 text-base font-bold text-(--button-text-color) bg-(--button-color) rounded-full flex-shrink-0 cursor-pointer border-solid border-2 border-(--search-bar-border-hover)"
+                className="flex items-center justify-center w-[2.7em] h-[2.7em] mr-2 text-base font-bold text-(--button-text-color) bg-(--button-color) rounded-full flex-shrink-0 cursor-pointer border-solid border-3 border-(--button-border)"
                 title={category.name}
               >
                 <span
@@ -179,7 +179,7 @@ export default function ButtonSettingsArea() {
               {hasInactiveButtons && category.isActive && (
                 <button
                   onClick={() => toggleExpanded(categoryIndex)}
-                  className="ml-2 flex items-center justify-center w-[2.7em] h-[2.7em] text-base font-bold text-(--button-text-color) bg-(--button-color) rounded-full flex-shrink-0 border-solid border-2 border-(--search-bar-border-hover) cursor-pointer"
+                  className="ml-2 flex items-center justify-center w-[2.7em] h-[2.7em] text-base font-bold text-(--button-text-color) bg-(--button-color) rounded-full flex-shrink-0 border-solid border-3 border-(--button-border) cursor-pointer"
                   title={isExpanded ? "非表示のボタンを閉じる" : "非表示のボタンを表示"}
                 >
                   {isExpanded ? 
@@ -198,7 +198,7 @@ export default function ButtonSettingsArea() {
                   <button
                     key={button.id}
                     onClick={() => handleToggleButton(button.id)}
-                    className="min-w-18 px-3 py-2 rounded-md whitespace-nowrap cursor-pointer bg-(--button-color) text-(--button-text-color) border-2 border-dashed border-(--search-bar-border-hover) hover:border-solid"
+                    className="min-w-18 px-3 py-2 rounded-md whitespace-nowrap cursor-pointer bg-(--button-color) text-(--button-text-color) border-3 border-dashed border-(--button-border) hover:border-solid"
                     title={`${button.name}を有効にする`}
                   >
                     {button.name}

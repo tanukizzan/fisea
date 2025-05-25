@@ -38,7 +38,7 @@ export const LinkButton: React.FC<DomainItem> = ({
   return (
     <button
       onClick={handleClick}
-      className="inline-flex items-center justify-center w-auto min-w-18 h-auto bg-(--button-color) text-(--button-text-color) no-underline py-2.5 px-4 mr-2 rounded-md flex-shrink-0 transition-colors duration-200 cursor-pointer hover:text-(--button-text-color-hover)"
+      className="inline-flex items-center justify-center border-1 border-(--button-border) w-auto min-w-18 h-auto bg-(--button-color) text-(--button-text-color) no-underline py-2 px-3.5 mr-2 rounded-md flex-shrink-0 transition-colors duration-200 cursor-pointer hover:text-(--button-text-color-hover)"
       type="button"
     >
       {name}
