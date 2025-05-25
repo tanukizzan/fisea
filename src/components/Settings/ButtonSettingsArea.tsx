@@ -19,6 +19,7 @@ import {
   horizontalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import ResetButton from './ResetButton';
 
 // カテゴリアイコンのマッピング
 const categoryIconMap: Record<string, string> = {
@@ -75,7 +76,7 @@ function SortableButton({ button, category, onToggle }: {
   );
 }
 
-export default function SettingsArea() {
+export default function ButtonSettingsArea() {
   const { categories, loading, toggleCategory, toggleButton, updateButtonOrder } = useSettings();
   const [expandedCategories, setExpandedCategories] = useState<Set<number>>(new Set());
   const [isDeleting, setIsDeleting] = useState(false);
@@ -244,17 +245,7 @@ export default function SettingsArea() {
           </div>
         );
       })}
-      <div className="flex justify-center mt-8">
-        <button
-          onClick={handleDeleteIndexedDB}
-          disabled={isDeleting}
-          className="px-4 py-2 rounded-md cursor-pointer bg-red-500 text-white border-2 border-solid border-red-600 hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-          title="IndexedDBのデータを削除します"
-        >
-          <span className="icon-[mdi--database-remove] w-5 h-5"></span>
-          {isDeleting ? '削除中...' : 'リセットする'}
-        </button>
-      </div>
+      <ResetButton isDeleting={isDeleting} onDelete={handleDeleteIndexedDB} />
     </div>
   );
 }
