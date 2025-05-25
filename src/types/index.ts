@@ -25,6 +25,7 @@ export interface DomainItem {
   queryBefore?: string;
   queryAfter?: string;
   queryAlt?: string;
+  category?: string;
 }
 
 export interface ButtonItem {

@@ -10,6 +10,16 @@ export default function SelectorSettingsArea() {
   const { defaultSearch, saveDefaultSearch, isLoading } = useDefaultSearchSettings();
   const { buttonList } = useButtonList();
 
+  // カテゴリごとにボタンをグループ化
+  const groupedButtons = buttonList.reduce((acc, button) => {
+    const category = button.category || 'その他';
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(button);
+    return acc;
+  }, {} as Record<string, DomainItem[]>);
+
   const handleSearchSiteChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedButton = buttonList.find((button: DomainItem) => button.name === event.target.value);
     if (selectedButton) {
@@ -18,7 +28,7 @@ export default function SelectorSettingsArea() {
   };
 
   return (
-    <div className="rounded-lg p-4 mx-4 w-full max-w-2xl border-2 border-solid border-(--search-bar-border)">
+    <div className="rounded-lg p-4 mx-4 w-full max-w-2xl bg-white border-2 border-solid border-(--search-bar-border)">
       <h2 className="flex items-center mb-4 pb-4 w-full border-b-2 border-solid border-(--search-bar-border)">
         <span className="icon-[mdi--settings-outline] text-(--text-color) mr-1 w-7 h-7"></span>
         <span className="text-lg font-bold">設定</span>
@@ -35,10 +45,14 @@ export default function SelectorSettingsArea() {
             aria-label="デフォルトの検索サイトを選択"
           >
             <option value="">選択してください</option>
-            {buttonList.map((button: DomainItem) => (
-              <option key={button.name} value={button.name}>
-                {button.name}
-              </option>
+            {Object.entries(groupedButtons).map(([category, buttons]) => (
+              <optgroup key={category} label={category}>
+                {buttons.map((button: DomainItem) => (
+                  <option key={button.name} value={button.name}>
+                    {button.name}
+                  </option>
+                ))}
+              </optgroup>
             ))}
           </select>
         </div>
