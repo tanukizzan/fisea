@@ -1,8 +1,10 @@
 import { useDefaultSearchSettings } from 'hooks/useDefaultSearchSettings';
+import { useTabOpenSettings } from 'hooks/useTabOpenSettings';
 import { generateSearchUrl } from 'utils/searchUrlGenerator';
 
 export const useDefaultSearch = () => {
   const { defaultSearch } = useDefaultSearchSettings();
+  const { tabOpenType } = useTabOpenSettings();
 
   const performSearch = (searchWord: string) => {
     if (!defaultSearch) {
@@ -13,12 +15,12 @@ export const useDefaultSearch = () => {
       const url = searchWord
         ? `https://www.google.co.jp/search?q=${encodedQuery}`
         : "https://www.google.co.jp/";
-      window.open(url, '_blank');
+      window.open(url, tabOpenType === 'new' ? '_blank' : '_self');
       return;
     }
 
     const searchUrl = generateSearchUrl(searchWord, defaultSearch);
-    window.open(searchUrl, '_blank');
+    window.open(searchUrl, tabOpenType === 'new' ? '_blank' : '_self');
   };
 
   return { performSearch };

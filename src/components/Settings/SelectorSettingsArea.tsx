@@ -4,11 +4,13 @@ import React from 'react';
 import ResetButton from './ResetButton';
 import { useDefaultSearchSettings } from 'hooks/useDefaultSearchSettings';
 import { useButtonList } from 'hooks/useButtonList';
+import { useTabOpenSettings } from 'hooks/useTabOpenSettings';
 import { DomainItem } from 'types';
 
 export default function SelectorSettingsArea() {
-  const { defaultSearch, saveDefaultSearch, isLoading } = useDefaultSearchSettings();
+  const { defaultSearch, saveDefaultSearch, isLoading: isDefaultSearchLoading } = useDefaultSearchSettings();
   const { buttonList } = useButtonList();
+  const { tabOpenType, saveTabOpenType, isLoading: isTabOpenLoading } = useTabOpenSettings();
 
   // カテゴリごとにボタンをグループ化
   const groupedButtons = buttonList.reduce((acc, button) => {
@@ -27,6 +29,10 @@ export default function SelectorSettingsArea() {
     }
   };
 
+  const handleTabOpenChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    saveTabOpenType(event.target.value as 'new' | 'current');
+  };
+
   return (
     <div className="rounded-lg p-4 mx-4 w-full max-w-2xl bg-white border-2 border-solid border-(--search-bar-border)">
       <h2 className="flex items-center mb-4 pb-4 w-full border-b-2 border-solid border-(--search-bar-border)">
@@ -41,7 +47,7 @@ export default function SelectorSettingsArea() {
             value={defaultSearch?.name || ''}
             onChange={handleSearchSiteChange}
             className="border border-(--search-bar-border) rounded px-2 py-1 bg-(--background-color) text-(--text-color)"
-            disabled={isLoading}
+            disabled={isDefaultSearchLoading}
             aria-label="デフォルトの検索サイトを選択"
           >
             <option value="">選択してください</option>
@@ -61,7 +67,16 @@ export default function SelectorSettingsArea() {
       <div className="flex flex-col items-start justify-start w-full mt-6">
         <div className="flex items-center justify-start w-full">
           <h3 className="text-md font-bold mr-4">タブの開き方</h3>
-          <p>ここにセレクトボタンを設置</p>
+          <select
+            value={tabOpenType}
+            onChange={handleTabOpenChange}
+            className="border border-(--search-bar-border) rounded px-2 py-1 bg-(--background-color) text-(--text-color)"
+            disabled={isTabOpenLoading}
+            aria-label="タブの開き方を選択"
+          >
+            <option value="new">新しいタブで開く</option>
+            <option value="current">現在のタブで開く</option>
+          </select>
         </div>
         <p className="text-sm mt-2">新しいタブで開くか、現在のタブで開くかを選択します。</p>
       </div>

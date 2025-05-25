@@ -1,9 +1,10 @@
 import { CategoryItem, DomainItem } from 'types';
 
 const DB_NAME = 'fiseaDB';
-const DB_VERSION = 2;
+const DB_VERSION = 1;
 const BUTTON_STORE = 'buttonData';
 const DEFAULT_SEARCH_STORE = 'defaultSearch';
+const SETTINGS_STORE = 'settings';
 
 // IndexedDBへの接続を開く
 export const openDB = (): Promise<IDBDatabase> => {
@@ -23,10 +24,14 @@ export const openDB = (): Promise<IDBDatabase> => {
       if (db.objectStoreNames.contains(DEFAULT_SEARCH_STORE)) {
         db.deleteObjectStore(DEFAULT_SEARCH_STORE);
       }
+      if (db.objectStoreNames.contains(SETTINGS_STORE)) {
+        db.deleteObjectStore(SETTINGS_STORE);
+      }
       
       // ストアを新規作成
       db.createObjectStore(BUTTON_STORE, { keyPath: 'name' });
       db.createObjectStore(DEFAULT_SEARCH_STORE);
+      db.createObjectStore(SETTINGS_STORE);
     };
   });
 };

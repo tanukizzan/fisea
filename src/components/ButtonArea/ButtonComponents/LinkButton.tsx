@@ -4,6 +4,7 @@ import { useSearch } from "../../SearchArea/SearchContext";
 import { useCallback } from "react";
 import { DomainItem } from 'types';
 import { generateSearchUrl } from 'utils/searchUrlGenerator';
+import { useTabOpenSettings } from 'hooks/useTabOpenSettings';
 
 export const LinkButton: React.FC<DomainItem> = ({
   type,
@@ -16,6 +17,7 @@ export const LinkButton: React.FC<DomainItem> = ({
   queryAlt = "",
 }) => {
   const { wordInput } = useSearch();
+  const { tabOpenType } = useTabOpenSettings();
 
   const handleClick = useCallback(() => {
     const url = generateSearchUrl(wordInput, {
@@ -29,9 +31,9 @@ export const LinkButton: React.FC<DomainItem> = ({
       queryAlt,
     });
     if (url) {
-      window.open(url, "_blank", "noopener,noreferrer");
+      window.open(url, tabOpenType === 'new' ? '_blank' : '_self', "noopener,noreferrer");
     }
-  }, [type, name, domain, subDomain, directory, queryBefore, queryAfter, queryAlt, wordInput]);
+  }, [type, name, domain, subDomain, directory, queryBefore, queryAfter, queryAlt, wordInput, tabOpenType]);
 
   return (
     <button
