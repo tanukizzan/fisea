@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { useSettings } from "contexts/SettingsContext";
-import { useRouter } from "next/navigation";
 import {
   DndContext,
   closestCenter,
@@ -19,7 +18,6 @@ import {
   horizontalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import ResetButton from './ResetButton';
 
 // カテゴリアイコンのマッピング
 const categoryIconMap: Record<string, string> = {
@@ -79,8 +77,6 @@ function SortableButton({ button, category, onToggle }: {
 export default function ButtonSettingsArea() {
   const { categories, loading, toggleCategory, toggleButton, updateButtonOrder } = useSettings();
   const [expandedCategories, setExpandedCategories] = useState<Set<number>>(new Set());
-  const [isDeleting, setIsDeleting] = useState(false);
-  const router = useRouter();
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -143,30 +139,8 @@ export default function ButtonSettingsArea() {
     });
   };
 
-  const handleDeleteIndexedDB = async () => {
-    if (!window.confirm('IndexedDBのデータを削除しますか？この操作は取り消せません。')) {
-      return;
-    }
-
-    setIsDeleting(true);
-    try {
-      const databases = await window.indexedDB.databases();
-      for (const db of databases) {
-        if (db.name) {
-          await window.indexedDB.deleteDatabase(db.name);
-        }
-      }
-      router.replace('/');
-    } catch (error) {
-      console.error('IndexedDBの削除中にエラーが発生しました:', error);
-      alert('データの削除中にエラーが発生しました。');
-    } finally {
-      setIsDeleting(false);
-    }
-  };
-
   return (
-    <div className="flex flex-col justify-center mx-auto my-4 mb-8 max-md:overflow-x-scroll max-md:w-full">
+    <div className="flex flex-col justify-center mx-auto pt-4 pb-12 max-md:overflow-x-scroll max-md:w-full">
       {categories.map((category, categoryIndex) => {
         const inactiveButtons = category.list.filter((button) => !button.isActive);
         const hasInactiveButtons = inactiveButtons.length > 0;
@@ -245,7 +219,6 @@ export default function ButtonSettingsArea() {
           </div>
         );
       })}
-      <ResetButton isDeleting={isDeleting} onDelete={handleDeleteIndexedDB} />
     </div>
   );
 }
