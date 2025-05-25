@@ -48,7 +48,7 @@ export default function SelectorSettingsArea() {
           <select
             value={defaultSearch?.name || ''}
             onChange={handleSearchSiteChange}
-            className="border border-(--search-bar-border) rounded-md px-2 py-2 mt-2 bg-(--background-color) text-(--text-color)"
+            className="border-3 border-(--search-bar-border) w-[12em] rounded-md px-3 py-2 mt-2 bg-(--search-bar-bg) text-(--text-color)"
             disabled={isDefaultSearchLoading}
             aria-label="デフォルトの検索サイトを選択"
           >
