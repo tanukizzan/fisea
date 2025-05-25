@@ -55,7 +55,7 @@ export default function SubmitButton({ wordInput }: SearchInputProps) {
   return (
     <button
       type="button"
-      className="h-full w-auto flex justify-center items-center bg-(--submit-button) border-none rounded-r-md px-3 transition-opacity duration-200 cursor-pointer flex-shrink-0 hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-(--submit-button)"
+      className="h-full min-h-[2.7em] w-auto flex justify-center items-center bg-(--submit-button) border-none rounded-r-md px-3 transition-opacity duration-200 cursor-pointer flex-shrink-0 hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-(--submit-button)"
       onClick={handleClick}
       aria-label="検索実行"
     >

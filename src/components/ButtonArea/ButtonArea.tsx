@@ -59,10 +59,10 @@ export default function ButtonArea() {
   }
 
   return (
-    <div className="flex flex-col justify-center mx-auto my-4 mb-8 max-md:overflow-x-scroll max-md:w-full">
+    <div className="flex flex-col justify-center mx-auto pt-4 pb-12 max-md:overflow-x-scroll max-md:w-full">
       {activeCategories.map((category, index) => (
         <div key={index} className="flex justify-start mt-3 max-md:ml-5">
-          <div className="flex justify-center items-center w-[2.7em] h-[2.7em] mr-2 text-base font-bold text-(--button-text-color) bg-(--button-color) rounded-full flex-shrink-0">
+          <div className="flex justify-center items-center w-[2.7em] h-[2.7em] mr-2 text-base font-bold text-(--button-text-color) bg-(--button-color) border-1 border-(--button-color) rounded-full flex-shrink-0">
             <span className={`${categoryIconMap[category.name] || "mdi:folder-outline"} w-5 h-5`}></span>
           </div>
           <div className="flex justify-center items-center">

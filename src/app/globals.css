@@ -14,6 +14,7 @@
   --submit-button: light-dark(#40adfa, #12334a);
   --submit-button-hover: light-dark(#40adfa, #1c4f73);
   --button-color: light-dark(#e9eef1, #12334a);
+  --button-border: light-dark(#ccd0d6, #1c4f73);
   --button-text-color: light-dark(#0a1c29, #c3dcef);
   --button-text-color-hover: light-dark(#1c4f73, #f7fbfd);
   --save-button-text-color: light-dark(#ffffff, #0a1c29);
