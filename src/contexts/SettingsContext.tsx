@@ -12,6 +12,7 @@ interface SettingsContextType {
   toggleCategory: (categoryIndex: number) => void;
   toggleButton: (buttonId: string) => void;
   handleSave: () => Promise<void>;
+  updateButtonOrder: (categoryIndex: number, oldIndex: number, newIndex: number) => void;
 }
 
 const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
@@ -118,13 +119,27 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const updateButtonOrder = (categoryIndex: number, oldIndex: number, newIndex: number) => {
+    setCategories(prevCategories => {
+      const newCategories = [...prevCategories];
+      const category = { ...newCategories[categoryIndex] };
+      const newList = [...category.list];
+      const [movedItem] = newList.splice(oldIndex, 1);
+      newList.splice(newIndex, 0, movedItem);
+      category.list = newList;
+      newCategories[categoryIndex] = category;
+      return newCategories;
+    });
+  };
+
   return (
     <SettingsContext.Provider value={{
       categories,
       loading,
       toggleCategory,
       toggleButton,
-      handleSave
+      handleSave,
+      updateButtonOrder
     }}>
       {children}
     </SettingsContext.Provider>
