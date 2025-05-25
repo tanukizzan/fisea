@@ -1,8 +1,9 @@
-import { CategoryItem } from 'types';
+import { CategoryItem, DomainItem } from 'types';
 
 const DB_NAME = 'fiseaDB';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 const BUTTON_STORE = 'buttonData';
+const DEFAULT_SEARCH_STORE = 'defaultSearch';
 
 // IndexedDBへの接続を開く
 export const openDB = (): Promise<IDBDatabase> => {
@@ -14,9 +15,18 @@ export const openDB = (): Promise<IDBDatabase> => {
     
     request.onupgradeneeded = () => {
       const db = request.result;
-      if (!db.objectStoreNames.contains(BUTTON_STORE)) {
-        db.createObjectStore(BUTTON_STORE, { keyPath: 'name' });
+      
+      // 既存のストアを削除
+      if (db.objectStoreNames.contains(BUTTON_STORE)) {
+        db.deleteObjectStore(BUTTON_STORE);
       }
+      if (db.objectStoreNames.contains(DEFAULT_SEARCH_STORE)) {
+        db.deleteObjectStore(DEFAULT_SEARCH_STORE);
+      }
+      
+      // ストアを新規作成
+      db.createObjectStore(BUTTON_STORE, { keyPath: 'name' });
+      db.createObjectStore(DEFAULT_SEARCH_STORE);
     };
   });
 };
@@ -43,6 +53,33 @@ export const saveButtonData = async (data: CategoryItem[]): Promise<void> => {
   data.forEach(category => {
     store.put(category);
   });
+  
+  return new Promise((resolve, reject) => {
+    transaction.oncomplete = () => resolve();
+    transaction.onerror = () => reject(transaction.error);
+  });
+};
+
+// デフォルト検索サイトの設定を取得
+export const getDefaultSearch = async (): Promise<DomainItem | null> => {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(DEFAULT_SEARCH_STORE, 'readonly');
+    const store = transaction.objectStore(DEFAULT_SEARCH_STORE);
+    const request = store.get('default-search-settings');
+    
+    request.onerror = () => reject(request.error);
+    request.onsuccess = () => resolve(request.result || null);
+  });
+};
+
+// デフォルト検索サイトの設定を保存
+export const saveDefaultSearch = async (data: DomainItem): Promise<void> => {
+  const db = await openDB();
+  const transaction = db.transaction(DEFAULT_SEARCH_STORE, 'readwrite');
+  const store = transaction.objectStore(DEFAULT_SEARCH_STORE);
+  
+  store.put(data, 'default-search-settings');
   
   return new Promise((resolve, reject) => {
     transaction.oncomplete = () => resolve();

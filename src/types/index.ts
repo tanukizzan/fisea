@@ -17,8 +17,8 @@ export interface ClearButtonProps {
 }
 
 export interface DomainItem {
-  name: string;
   type: number;
+  name: string;
   domain: string;
   subDomain?: string;
   directory?: string;
