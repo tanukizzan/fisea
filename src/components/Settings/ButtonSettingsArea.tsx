@@ -67,7 +67,7 @@ function SortableButton({ button, category, onToggle }: {
       <button
         onClick={handleCloseClick}
         className="absolute cursor-pointer -top-2 -right-2 w-5 h-5 flex items-center justify-center bg-(--search-bar-bg) border-solid border-2 border-(--search-bar-border-hover) text-(--button-text-color) rounded-full group-hover:opacity-100 transition-opacity duration-200"
-        title={`${button.name}を無効にする`}
+        title={`${button.name}を非表示にする`}
         type="button"
       >
         <span className="icon-[mdi--close] w-3 h-3"></span>
@@ -180,7 +180,7 @@ export default function ButtonSettingsArea() {
                 <button
                   onClick={() => toggleExpanded(categoryIndex)}
                   className="ml-2 flex items-center justify-center w-[2.7em] h-[2.7em] text-base font-bold text-(--button-text-color) bg-(--button-color) rounded-full flex-shrink-0 border-solid border-2 border-(--search-bar-border-hover) cursor-pointer"
-                  title={isExpanded ? "無効のボタンを隠す" : "無効のボタンを表示"}
+                  title={isExpanded ? "非表示のボタンを閉じる" : "非表示のボタンを表示"}
                 >
                   {isExpanded ? 
                     <span className={`icon-[mdi--check] w-5 h-5`}></span>

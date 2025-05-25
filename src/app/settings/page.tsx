@@ -17,7 +17,7 @@ export default function Home() {
         <ButtonSettingsArea />
         <SelectorSettingsArea />
       </main>
-      <footer className="flex items-center justify-center w-full h-16">
+      <footer className="flex items-center justify-center w-full h-20">
         <SaveButton />
       </footer>
     </div>
