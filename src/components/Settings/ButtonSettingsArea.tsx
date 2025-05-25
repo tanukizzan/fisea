@@ -55,10 +55,11 @@ function SortableButton({ button, category, onToggle }: {
 
   return (
     <div ref={setNodeRef} style={style} className="relative group touch-none">
-      <div {...attributes} {...listeners} className="cursor-move">
+      <div {...attributes} {...listeners}>
         <button
-          className="select-none min-w-18 px-3 py-2 rounded-md whitespace-nowrap bg-(--button-color) text-(--button-text-color) border-2 border-solid border-(--search-bar-border-hover)"
+          className="select-none cursor-move min-w-18 px-3 py-2 rounded-md whitespace-nowrap bg-(--button-color) text-(--button-text-color) border-2 border-solid border-(--search-bar-border-hover)"
           disabled={!category.isActive}
+          type="button"
         >
           {button.name}
         </button>
@@ -67,6 +68,7 @@ function SortableButton({ button, category, onToggle }: {
         onClick={handleCloseClick}
         className="absolute cursor-pointer -top-2 -right-2 w-5 h-5 flex items-center justify-center bg-(--search-bar-bg) border-solid border-2 border-(--search-bar-border-hover) text-(--button-text-color) rounded-full group-hover:opacity-100 transition-opacity duration-200"
         title={`${button.name}を無効にする`}
+        type="button"
       >
         <span className="icon-[mdi--close] w-3 h-3"></span>
       </button>
@@ -123,7 +125,7 @@ export default function ButtonSettingsArea() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center my-8">読み込み中...</div>
+      <div className="flex justify-center items-center my-8 max-md:h-[calc(100dvh/2)] h-[calc(100dvh/3)]">読み込み中...</div>
     );
   }
 
