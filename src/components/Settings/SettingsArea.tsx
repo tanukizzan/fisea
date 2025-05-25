@@ -55,7 +55,7 @@ function SortableButton({ button, category, onToggle }: {
   };
 
   return (
-    <div ref={setNodeRef} style={style} className="relative group">
+    <div ref={setNodeRef} style={style} className="relative group touch-none">
       <div {...attributes} {...listeners} className="cursor-move">
         <button
           className="select-none min-w-18 px-3 py-2 rounded-md whitespace-nowrap bg-(--button-color) text-(--button-text-color) border-2 border-solid border-(--search-bar-border-hover)"
@@ -173,7 +173,7 @@ export default function SettingsArea() {
 
         return (
           <div key={categoryIndex} className="flex flex-col">
-            <div className={`flex items-start mt-3 max-md:ml-5 ${
+            <div className={`flex items-start mt-4 max-md:ml-5 ${
               !category.isActive && "opacity-50"
             }`}>
               <button
@@ -232,7 +232,7 @@ export default function SettingsArea() {
                   <button
                     key={button.id}
                     onClick={() => handleToggleButton(button.id)}
-                    className="px-3 py-2 rounded-md whitespace-nowrap cursor-pointer bg-(--button-color) text-(--button-text-color) border-2 border-dashed border-(--search-bar-border-hover) hover:border-solid"
+                    className="min-w-18 px-3 py-2 rounded-md whitespace-nowrap cursor-pointer bg-(--button-color) text-(--button-text-color) border-2 border-dashed border-(--search-bar-border-hover) hover:border-solid"
                     title={`${button.name}を有効にする`}
                   >
                     {button.name}
