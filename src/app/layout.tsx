@@ -1,7 +1,14 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { SearchProvider } from "components/SearchArea/SearchContext";
 
 import "./globals.css";
+ 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f7fbfd' },
+    { media: '(prefers-color-scheme: dark)', color: '#050e15' },
+  ],
+}
 
 const SITE_TITLE = "fisea | ファイシ―";
 const SITE_TITLE_SHORT = "fisea";
