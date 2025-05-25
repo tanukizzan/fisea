@@ -3,6 +3,11 @@ import SaveButton from "components/Settings/SaveButton";
 import SearchBar from "components/SearchArea/SearchBar";
 import ButtonSettingsArea from "components/Settings/ButtonSettingsArea";
 import SelectorSettingsArea from "components/Settings/SelectorSettingsArea";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "設定",
+};
 
 export default function Home() {
   return (
