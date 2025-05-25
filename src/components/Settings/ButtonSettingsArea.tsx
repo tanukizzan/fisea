@@ -110,17 +110,6 @@ export default function ButtonSettingsArea() {
 
   const handleToggleButton = (buttonId: string) => {
     toggleButton(buttonId);
-    // ボタンが無効化された場合、該当するカテゴリを展開状態にする
-    const categoryIndex = categories.findIndex(category =>
-      category.list.some(button => button.id === buttonId)
-    );
-    if (categoryIndex !== -1) {
-      setExpandedCategories(prev => {
-        const newSet = new Set(prev);
-        newSet.add(categoryIndex);
-        return newSet;
-      });
-    }
   };
 
   if (loading) {
