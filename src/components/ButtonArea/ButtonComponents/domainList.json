@@ -1,9 +1,9 @@
 [
 	{
 		"type": 1,
-		"category": "Google",
-		"name": "検索",
-		"domain": "www.google.co.jp/",
+		"category": "Search",
+		"name": "Google",
+		"domain": "www.google.com/",
 		"subDomain": "",
 		"directory": "",
 		"queryBefore": "search?q=",
@@ -12,9 +12,9 @@
 	},
 	{
 		"type": 2,
-		"category": "Google",
-		"name": "画像",
-		"domain": "www.google.co.jp/",
+		"category": "Search",
+		"name": "G Images",
+		"domain": "www.google.com/",
 		"subDomain": "",
 		"directory": "imghp",
 		"queryBefore": "search?q=",
@@ -23,9 +23,9 @@
 	},
 	{
 		"type": 3,
-		"category": "Google",
-		"name": "地図",
-		"domain": "www.google.co.jp/",
+		"category": "Search",
+		"name": "G Maps",
+		"domain": "www.google.com/",
 		"subDomain": "",
 		"directory": "maps/",
 		"queryBefore": "search/",
@@ -34,25 +34,14 @@
 	},
 	{
 		"type": 1,
-		"category": "Google",
-		"name": "翻訳",
-		"domain": "translate.google.co.jp/",
+		"category": "Search",
+		"name": "G News",
+		"domain": "news.google.com/",
 		"subDomain": "",
 		"directory": "",
-		"queryBefore": "?sl=auto&tl=ja&text=",
+		"queryBefore": "search?q=",
 		"queryAfter": "",
 		"queryAlt": ""
-	},
-	{
-		"type": 5,
-		"category": "Google",
-		"name": "YouTube",
-		"domain": "www.youtube.com/",
-		"subDomain": "",
-		"directory": "",
-		"queryBefore": "results?q=",
-		"queryAfter": "",
-		"queryAlt": "hashtag/"
 	},
 	{
 		"type": 4,
@@ -68,8 +57,19 @@
 	{
 		"type": 1,
 		"category": "Search",
+		"name": "Y! News",
+		"domain": "news.yahoo.co.jp/",
+		"subDomain": "",
+		"directory": "",
+		"queryBefore": "search?p=",
+		"queryAfter": "",
+		"queryAlt": ""
+	},
+	{
+		"type": 1,
+		"category": "Search",
 		"name": "Bing",
-		"domain": "www.bing.com/",
+		"domain": "bing.com/",
 		"subDomain": "",
 		"directory": "",
 		"queryBefore": "search?q=",
@@ -88,8 +88,19 @@
 		"queryAlt": ""
 	},
 	{
-		"type": 1,
+		"type": 5,
 		"category": "Search",
+		"name": "はてブ",
+		"domain": "b.hatena.ne.jp/",
+		"subDomain": "",
+		"directory": "",
+		"queryBefore": "q/",
+		"queryAfter": "?sort=popular&target=all&date_range=5y&users=3",
+		"queryAlt": ""
+	},
+	{
+		"type": 1,
+		"category": "Website",
 		"name": "Wikipedia",
 		"domain": "ja.wikipedia.org/wiki/",
 		"subDomain": "",
@@ -100,18 +111,40 @@
 	},
 	{
 		"type": 1,
-		"category": "Search",
-		"name": "JustWatch",
-		"domain": "www.justwatch.com/",
+		"category": "Website",
+		"name": "Cookpad",
+		"domain": "cookpad.com/jp/",
 		"subDomain": "",
 		"directory": "",
-		"queryBefore": "jp/検索?q=",
+		"queryBefore": "search/",
 		"queryAfter": "",
 		"queryAlt": ""
 	},
 	{
 		"type": 1,
-		"category": "Search",
+		"category": "Website",
+		"name": "クラシル",
+		"domain": "www.kurashiru.com/",
+		"subDomain": "",
+		"directory": "",
+		"queryBefore": "search?query=",
+		"queryAfter": "",
+		"queryAlt": ""
+	},
+	{
+		"type": 1,
+		"category": "Website",
+		"name": "デリッシュキッチン",
+		"domain": "delishkitchen.tv/",
+		"subDomain": "",
+		"directory": "",
+		"queryBefore": "search?q=",
+		"queryAfter": "",
+		"queryAlt": ""
+	},
+	{
+		"type": 1,
+		"category": "Website",
 		"name": "J-Stage",
 		"domain": "www.jstage.jst.go.jp/",
 		"subDomain": "",
@@ -122,7 +155,7 @@
 	},
 	{
 		"type": 1,
-		"category": "Search",
+		"category": "Website",
 		"name": "カーリル",
 		"domain": "calil.jp/",
 		"subDomain": "",
@@ -133,7 +166,7 @@
 	},
 	{
 		"type": 1,
-		"category": "AI",
+		"category": "Website",
 		"name": "ChatGPT",
 		"domain": "chatgpt.com/",
 		"subDomain": "",
@@ -144,7 +177,7 @@
 	},
 	{
 		"type": 1,
-		"category": "AI",
+		"category": "Website",
 		"name": "Claude",
 		"domain": "claude.ai/",
 		"subDomain": "",
@@ -155,7 +188,7 @@
 	},
 	{
 		"type": 1,
-		"category": "AI",
+		"category": "Website",
 		"name": "Perplexity",
 		"domain": "perplexity.ai/",
 		"subDomain": "",
@@ -166,7 +199,7 @@
 	},
 	{
 		"type": 1,
-		"category": "AI",
+		"category": "Website",
 		"name": "Genspark",
 		"domain": "genspark.ai/",
 		"subDomain": "",
@@ -177,9 +210,42 @@
 	},
 	{
 		"type": 1,
-		"category": "AI",
+		"category": "Website",
 		"name": "Felo",
 		"domain": "felo.ai/",
+		"subDomain": "",
+		"directory": "",
+		"queryBefore": "search?q=",
+		"queryAfter": "",
+		"queryAlt": ""
+	},
+	{
+		"type": 1,
+		"category": "Website",
+		"name": "GitHub",
+		"domain": "github.com/",
+		"subDomain": "",
+		"directory": "",
+		"queryBefore": "search?q=",
+		"queryAfter": "",
+		"queryAlt": ""
+	},
+	{
+		"type": 1,
+		"category": "Website",
+		"name": "Qiita",
+		"domain": "qiita.com/",
+		"subDomain": "",
+		"directory": "",
+		"queryBefore": "search?q=",
+		"queryAfter": "",
+		"queryAlt": ""
+	},
+	{
+		"type": 1,
+		"category": "Website",
+		"name": "Zenn",
+		"domain": "zenn.dev/",
 		"subDomain": "",
 		"directory": "",
 		"queryBefore": "search?q=",
@@ -200,7 +266,7 @@
 	{
 		"type": 4,
 		"category": "Shopping",
-		"name": "Rakuten",
+		"name": "楽天",
 		"domain": "rakuten.co.jp/",
 		"subDomain": "search.",
 		"directory": "",
@@ -211,7 +277,7 @@
 	{
 		"type": 1,
 		"category": "Shopping",
-		"name": "Y!Shopping",
+		"name": "ヤフショ",
 		"domain": "shopping.yahoo.co.jp/",
 		"subDomain": "",
 		"directory": "",
@@ -308,6 +374,17 @@
 		"queryAlt": "hashtag/"
 	},
 	{
+		"type": 6,
+		"category": "Social",
+		"name": "YouTube",
+		"domain": "www.youtube.com/",
+		"subDomain": "",
+		"directory": "",
+		"queryBefore": "results?q=",
+		"queryAfter": "",
+		"queryAlt": "hashtag/"
+	},
+	{
 		"type": 1,
 		"category": "Social",
 		"name": "Instagram",
@@ -332,22 +409,33 @@
 	{
 		"type": 6,
 		"category": "Social",
-		"name": "Facebook",
-		"domain": "www.facebook.com/",
-		"subDomain": "",
-		"directory": "",
-		"queryBefore": "search/top/?q=",
-		"queryAfter": "",
-		"queryAlt": "hashtag/"
-	},
-	{
-		"type": 6,
-		"category": "Social",
 		"name": "note",
 		"domain": "note.com/",
 		"subDomain": "",
 		"directory": "",
 		"queryBefore": "search?context=note&q=",
+		"queryAfter": "",
+		"queryAlt": "hashtag/"
+	},
+	{
+		"type": 7,
+		"category": "Social",
+		"name": "pixiv",
+		"domain": "www.pixiv.net/",
+		"subDomain": "",
+		"directory": "",
+		"queryBefore": "tags/",
+		"queryAfter": "/artworks?s_mode=s_tag",
+		"queryAlt": "users/"
+	},
+	{
+		"type": 6,
+		"category": "Social",
+		"name": "Facebook",
+		"domain": "www.facebook.com/",
+		"subDomain": "",
+		"directory": "",
+		"queryBefore": "search/top/?q=",
 		"queryAfter": "",
 		"queryAlt": "hashtag/"
 	},
@@ -363,14 +451,14 @@
 		"queryAlt": ""
 	},
 	{
-		"type": 7,
+		"type": 1,
 		"category": "Social",
-		"name": "pixiv",
-		"domain": "www.pixiv.net/",
+		"name": "JustWatch",
+		"domain": "www.justwatch.com/",
 		"subDomain": "",
 		"directory": "",
-		"queryBefore": "tags/",
-		"queryAfter": "/artworks?s_mode=s_tag",
-		"queryAlt": "users/"
+		"queryBefore": "jp/検索?q=",
+		"queryAfter": "",
+		"queryAlt": ""
 	}
 ]
