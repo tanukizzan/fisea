@@ -1,52 +1,80 @@
 [
   {
-    "name": "Google",
-    "isActive": true,
-    "list": [
-      {
-        "name": "検索",
-        "isActive": true
-      },
-      {
-        "name": "画像",
-        "isActive": true
-      },
-      {
-        "name": "地図",
-        "isActive": true
-      },
-      {
-        "name": "翻訳",
-        "isActive": true
-      },
-      {
-        "name": "YouTube",
-        "isActive": true
-      }
-    ]
-  },
-  {
     "name": "Search",
     "isActive": true,
     "list": [
+      {
+        "name": "Google",
+        "isActive": true
+      },
+      {
+        "name": "G Maps",
+        "isActive": true
+      },
       {
         "name": "Yahoo!",
         "isActive": true
       },
       {
-        "name": "Bing",
+        "name": "Y! News",
         "isActive": true
       },
       {
-        "name": "DuckDuckGo",
-        "isActive": true
+        "name": "はてブ",
+        "isActive": false
       },
+      {
+        "name": "G Images",
+        "isActive": false
+      },
+      {
+        "name": "G News",
+        "isActive": false
+      },
+      {
+        "name": "Bing",
+        "isActive": false
+      },
+      {
+        "name": "DuckDuckGo",
+        "isActive": false
+      }
+    ]
+  },
+  {
+    "name": "Website",
+    "isActive": true,
+    "list": [
       {
         "name": "Wikipedia",
         "isActive": true
       },
       {
-        "name": "JustWatch",
+        "name": "ChatGPT",
+        "isActive": true
+      },
+      {
+        "name": "Cookpad",
+        "isActive": true
+      },
+      {
+        "name": "クラシル",
+        "isActive": true
+      },
+      {
+        "name": "Claude",
+        "isActive": false
+      },
+      {
+        "name": "Perplexity",
+        "isActive": false
+      },
+      {
+        "name": "Genspark",
+        "isActive": false
+      },
+      {
+        "name": "Felo",
         "isActive": false
       },
       {
@@ -56,31 +84,21 @@
       {
         "name": "カーリル",
         "isActive": false
-      }
-    ]
-  },
-  {
-    "name": "AI",
-    "isActive": true,
-    "list": [
-      {
-        "name": "ChatGPT",
-        "isActive": true
       },
       {
-        "name": "Claude",
-        "isActive": true
+        "name": "GitHub",
+        "isActive": false
       },
       {
-        "name": "Perplexity",
-        "isActive": true
+        "name": "Qiita",
+        "isActive": false
       },
       {
-        "name": "Genspark",
-        "isActive": true
+        "name": "Zenn",
+        "isActive": false
       },
       {
-        "name": "Felo",
+        "name": "デリッシュキッチン",
         "isActive": false
       }
     ]
@@ -94,11 +112,11 @@
         "isActive": true
       },
       {
-        "name": "Rakuten",
+        "name": "楽天",
         "isActive": true
       },
       {
-        "name": "Y!Shopping",
+        "name": "ヤフショ",
         "isActive": true
       },
       {
@@ -140,6 +158,10 @@
         "isActive": true
       },
       {
+        "name": "YouTube",
+        "isActive": true
+      },
+      {
         "name": "Instagram",
         "isActive": true
       },
@@ -148,12 +170,12 @@
         "isActive": true
       },
       {
-        "name": "Facebook",
-        "isActive": false
-      },
-      {
         "name": "note",
         "isActive": true
+      },
+      {
+        "name": "Facebook",
+        "isActive": false
       },
       {
         "name": "Pinterest",
@@ -161,6 +183,10 @@
       },
       {
         "name": "pixiv",
+        "isActive": false
+      },
+      {
+        "name": "JustWatch",
         "isActive": false
       }
     ]
