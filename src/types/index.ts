@@ -43,3 +43,12 @@ export interface CategoryItem {
   isActive: boolean;
   list: ButtonItem[];
 }
+
+export const categoryIconMap: Record<string, string> = {
+  Google: "icon-[cib--google]",
+  Search: "icon-[octicon--search-16]",
+  AI: "icon-[octicon--light-bulb-16]",
+  Shopping: "icon-[mdi--shopping-cart]",
+  Social: "icon-[octicon--hash-16]",
+  Other: "icon-[mdi--folder]",
+};

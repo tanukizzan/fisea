@@ -5,17 +5,7 @@ import { LinkButton } from './ButtonComponents/LinkButton';
 import domainList from './ButtonComponents/domainList.json';
 import buttonListData from './ButtonComponents/buttonList.json';
 import { syncButtonData } from '../../utils/indexedDB';
-import { DomainItem, CategoryItem } from 'types';
-
-// カテゴリアイコンのマッピング
-const categoryIconMap: Record<string, string> = {
-  "Google": "icon-[cib--google]",
-  "Search": "icon-[octicon--search-16]",
-  "AI": "icon-[octicon--light-bulb-16]",
-  "Shopping": "icon-[mdi--shopping-cart]",
-  "Social": "icon-[octicon--hash-16]",
-  "Other": "icon-[mdi--folder]"
-};
+import { DomainItem, CategoryItem, categoryIconMap } from 'types';
 
 export default function ButtonArea() {
   const [categories, setCategories] = useState<CategoryItem[]>([]);
@@ -59,14 +49,14 @@ export default function ButtonArea() {
   }
 
   return (
-    <div className="flex flex-col justify-center mx-auto pt-4 pb-12 max-md:overflow-x-scroll max-md:w-full">
+    <div className="flex flex-col justify-center mx-auto pt-4 pb-12 sm:overflow-x-visible overflow-x-auto max-sm:w-full">
       {activeCategories.map((category, index) => (
-        <div key={index} className="flex justify-start mt-3 max-md:ml-5">
+        <div key={index} className="flex justify-start items-center mt-3 max-sm:ml-5">
           <div className="flex justify-center items-center w-[2.7em] h-[2.7em] mr-2 text-base font-bold text-(--button-text-color) bg-(--button-color) border-1 border-(--button-color) rounded-full flex-shrink-0">
             <span className={`${categoryIconMap[category.name] || "mdi:folder-outline"} w-5 h-5`}></span>
           </div>
           <div className="flex justify-center items-center">
-            <ul className="flex whitespace-nowrap list-none p-0 m-0 w-full">
+            <ul className="flex flex-nowrap sm:flex-wrap max-w-[34rem] whitespace-nowrap list-none p-0 m-0 gap-2">
               {category.list
                 .filter(button => button.isActive)
                 .map((button, buttonIndex) => {
