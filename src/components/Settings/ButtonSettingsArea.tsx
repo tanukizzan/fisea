@@ -47,7 +47,7 @@ function SortableButton({
     <div ref={setNodeRef} style={style} className="relative group touch-none">
       <div {...attributes} {...listeners}>
         <button
-          className="select-none cursor-move min-w-18 h-[2.7em] py-2 px-3.5 rounded-md whitespace-nowrap bg-(--button-color) text-(--button-text-color) border-3 border-solid border-(--button-border)"
+          className="select-none cursor-move min-w-18 h-[2.7em] px-3.5 rounded-md whitespace-nowrap bg-(--button-color) text-(--button-text-color) border-3 border-solid border-(--button-border)"
           disabled={!category.isActive}
           type="button"
         >

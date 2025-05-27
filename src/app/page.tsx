@@ -15,7 +15,7 @@ export default function Home() {
         </div>
         <ButtonArea />
       </main>
-      <footer className="absolute bottom-0 flex items-center justify-center w-full h-16">
+      <footer className="absolute bottom-0 flex items-center justify-center w-full mt-6 mb-10">
         <SettingsButton />
       </footer>
     </div>
